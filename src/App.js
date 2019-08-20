@@ -1,25 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from 'react';
+import RangeInput from './components/RangeInput';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+  const [min, setMin] = useState(0);
+  const [max, setMax] = useState(100);
+  const [step, setStep] = useState(5);
+  const [currentRangeInputValue, setCurrentRangeInputValue] = useState(0);
+
+  const handleChange = event => {
+    let {id, value} = event.target;
+    value = parseFloat(value);
+    switch (id) {
+      case "Min":
+        setMin(value);
+        break;
+      case "Max":
+        setMax(value); 
+        break;
+      case "Step":
+        setStep(value); 
+        break;
+      default:
+        break;
+    }
+  };
+
+  return (<>
+      Min: <input id="Min" type="number" placeholder="min" value={min} onChange={handleChange}/>
+      Max: <input id="Max" type="number" placeholder="max"value={max} onChange={handleChange}/>
+      Step: <input id="Step" type="number" placeholder="step" value={step} onChange={handleChange}/>
+      <RangeInput setCurrentRangeInputValue={setCurrentRangeInputValue} min={min} max={max} step={step}/>
+      <h1>R$: {currentRangeInputValue}</h1>
+    </>
   );
 }
 

@@ -5,7 +5,7 @@ function App() {
   const [min, setMin] = useState(0);
   const [max, setMax] = useState(100);
   const [step, setStep] = useState(5);
-  const [currentRangeInputValue, setCurrentRangeInputValue] = useState(0);
+  const [rangeInputValue, setRangeInputValue] = useState(50);
 
   const handleChange = event => {
     let {id, value} = event.target;
@@ -29,8 +29,8 @@ function App() {
       Min: <input id="Min" type="number" placeholder="min" value={min} onChange={handleChange}/>
       Max: <input id="Max" type="number" placeholder="max"value={max} onChange={handleChange}/>
       Step: <input id="Step" type="number" placeholder="step" value={step} onChange={handleChange}/>
-      <RangeInput setCurrentRangeInputValue={setCurrentRangeInputValue} min={min} max={max} step={step}/>
-      <h1>R$: {currentRangeInputValue}</h1>
+      <RangeInput value={rangeInputValue} setValue={setRangeInputValue} min={min} max={max} step={step}/>
+      <h1>R$: {rangeInputValue}</h1>
     </>
   );
 }

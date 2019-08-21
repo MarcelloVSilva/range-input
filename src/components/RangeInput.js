@@ -1,13 +1,8 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import {InfoRange} from './InfoRange';
 
 function RangeInput(props) {
-  const {min, max, step, setCurrentRangeInputValue} = props;
-  const [value, setValue] = useState(50);
-
-  useEffect(() => {
-    setCurrentRangeInputValue && setCurrentRangeInputValue(value);
-  }, [value, setCurrentRangeInputValue])
+  const {min, max, step, value, setValue} = props;
 
   return (
     <div style={{

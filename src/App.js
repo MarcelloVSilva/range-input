@@ -44,10 +44,16 @@ function App() {
   }
 
   useEffect(() => {
-    if(count > rangeInputValue.length)
-      setRangeInputValue([...rangeInputValue, max]);
-    else if(count < rangeInputValue.length){
-      rangeInputValue.pop();
+    let diff = count - rangeInputValue.length;
+    if(diff > 0){
+      let arrAux = [];
+      for(let i=0; i<diff; i++) {
+        arrAux.push(max);
+      }
+      setRangeInputValue([...rangeInputValue, ...arrAux]);
+    }
+    else if(diff < 0){
+      rangeInputValue.splice(count);
       setRangeInputValue([...rangeInputValue])
     }
     return () => {

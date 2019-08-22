@@ -29,7 +29,7 @@ function App() {
       Min: <input id="Min" type="number" placeholder="min" value={min} onChange={handleChange}/>
       Max: <input id="Max" type="number" placeholder="max"value={max} onChange={handleChange}/>
       Step: <input id="Step" type="number" placeholder="step" value={step} onChange={handleChange}/>
-      <RangeInput value={rangeInputValue} setValue={setRangeInputValue} min={min} max={max} step={step}/>
+      <RangeInput value={rangeInputValue} onChange={setRangeInputValue} min={min} max={max} step={step}/>
       <h1>R$: {rangeInputValue}</h1>
     </>
   );

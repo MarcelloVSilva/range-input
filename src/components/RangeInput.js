@@ -1,22 +1,30 @@
 import React from 'react';
 import {InfoRange} from './InfoRange';
 
+const styles = {
+  container: {
+    display: "flex",
+    justifyContent: "space-between",
+    border: "1px black solid",
+    borderRadius: "3px",
+    padding: "1em",
+    margin: "1em"
+  },
+  range: {
+    width: "100%"
+  }
+};
+
 function RangeInput(props) {
-  const {min, max, step, value, setValue} = props;
+  const {min, max, step, value, onChange} = props;
 
   return (
-    <div style={{
-      display: "flex",
-      justifyContent: "space-between",
-      border: "1px black solid",
-      borderRadius: "3px",
-      padding: "1em",
-      margin: "1em"}}>
+    <div style={styles.container}>
       <InfoRange infoValue={value}/>
       <input 
-        style={{width: "100%"}} 
+        style={styles.range} 
         value={value} 
-        onChange={e=>setValue(e.target.value)} 
+        onChange={e=>onChange(e.target.value)} 
         min={min} 
         max={max} 
         step={step} 

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import MultiInputRange from './components/MultiInputRange';
 
 const styles = {
@@ -14,7 +14,9 @@ function App() {
   const [min, setMin] = useState(0);
   const [max, setMax] = useState(100);
   const [step, setStep] = useState(5);
-  const [rangeInputValue, setRangeInputValue] = useState([10, 20, 30, 40, 50]);
+  const [count, setCount] = useState(5);
+  const initialRangeInputValue = [10, 20, 30, 40, 50];
+  const [rangeInputValue, setRangeInputValue] = useState(initialRangeInputValue);
 
   const handleChange = event => {
     let {id, value} = event.target;
@@ -29,22 +31,38 @@ function App() {
       case "Step":
         setStep(value); 
         break;
+      case "Count":
+        setCount(value); 
+        break;
       default:
         break;
     }
   };
 
   const onChange = (values) => {
-    console.log([...values]);
     setRangeInputValue([...values]);
   }
+
+  useEffect(() => {
+    if(count > rangeInputValue.length)
+      setRangeInputValue([...rangeInputValue, max]);
+    else if(count < rangeInputValue.length){
+      rangeInputValue.pop();
+      setRangeInputValue([...rangeInputValue])
+    }
+    return () => {
+      setRangeInputValue(initialRangeInputValue);
+    };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [count])
 
   return (<>
       Min: <input id="Min" type="number" placeholder="min" value={min} onChange={handleChange}/>
       Max: <input id="Max" type="number" placeholder="max"value={max} onChange={handleChange}/>
       Step: <input id="Step" type="number" placeholder="step" value={step} onChange={handleChange}/>
+      Count: <input id="Count" type="number" placeholder="count" value={count} onChange={handleChange}/>
       <MultiInputRange 
-        count={5}
+        count={count}
         onChange={onChange}
         value={rangeInputValue}
         min={min} 

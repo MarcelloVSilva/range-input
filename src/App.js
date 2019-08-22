@@ -1,11 +1,20 @@
 import React, {useState} from 'react';
-import RangeInput from './components/RangeInput';
+import DoubleInputRange from './components/DoubleInputRange';
+
+const styles = {
+  showValues: {
+    background: "black",
+    color: "white",
+    width: "fit-content",
+    padding: "10px"
+  }
+};
 
 function App() {
   const [min, setMin] = useState(0);
   const [max, setMax] = useState(100);
   const [step, setStep] = useState(5);
-  const [rangeInputValue, setRangeInputValue] = useState(50);
+  const [rangeInputValue, setRangeInputValue] = useState([25, 75]);
 
   const handleChange = event => {
     let {id, value} = event.target;
@@ -25,12 +34,23 @@ function App() {
     }
   };
 
+  const onChange = (values) => {
+    setRangeInputValue([...values]);
+  }
+
   return (<>
       Min: <input id="Min" type="number" placeholder="min" value={min} onChange={handleChange}/>
       Max: <input id="Max" type="number" placeholder="max"value={max} onChange={handleChange}/>
       Step: <input id="Step" type="number" placeholder="step" value={step} onChange={handleChange}/>
-      <RangeInput value={rangeInputValue} onChange={setRangeInputValue} min={min} max={max} step={step}/>
-      <h1>R$: {rangeInputValue}</h1>
+      <DoubleInputRange 
+        onChange={onChange}
+        value={rangeInputValue}
+        min={min} 
+        max={max} 
+        step={step}/>
+      <div style={styles.showValues}>
+        DoubleInputRange.value: [{rangeInputValue[0]}, {rangeInputValue[1]}]
+      </div>
     </>
   );
 }

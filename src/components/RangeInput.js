@@ -16,20 +16,20 @@ const styles = {
 };
 
 function RangeInput(props) {
-  const {min, max, step, value, onChange} = props;
+  const {min, max, step, value, onChange, showInfoChange = true} = props;
 
   return (
     <div style={styles.container}>
-      <InfoRange infoValue={value}/>
+      {showInfoChange && <InfoRange infoValue={value}/>}
       <input 
         style={styles.range} 
         value={value} 
-        onChange={e=>onChange(e.target.value)} 
+        onChange={onChange} 
         min={min} 
         max={max} 
         step={step} 
         type="range"/>
-      <InfoRange infoValue={max} />
+      {showInfoChange && <InfoRange infoValue={max} />}
     </div>
   )
 }

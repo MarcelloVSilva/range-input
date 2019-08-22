@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import DoubleInputRange from './components/DoubleInputRange';
+import MultiInputRange from './components/MultiInputRange';
 
 const styles = {
   showValues: {
@@ -14,7 +14,7 @@ function App() {
   const [min, setMin] = useState(0);
   const [max, setMax] = useState(100);
   const [step, setStep] = useState(5);
-  const [rangeInputValue, setRangeInputValue] = useState([25, 75]);
+  const [rangeInputValue, setRangeInputValue] = useState([10, 20, 30, 40, 50]);
 
   const handleChange = event => {
     let {id, value} = event.target;
@@ -35,6 +35,7 @@ function App() {
   };
 
   const onChange = (values) => {
+    console.log([...values]);
     setRangeInputValue([...values]);
   }
 
@@ -42,14 +43,18 @@ function App() {
       Min: <input id="Min" type="number" placeholder="min" value={min} onChange={handleChange}/>
       Max: <input id="Max" type="number" placeholder="max"value={max} onChange={handleChange}/>
       Step: <input id="Step" type="number" placeholder="step" value={step} onChange={handleChange}/>
-      <DoubleInputRange 
+      <MultiInputRange 
+        count={5}
         onChange={onChange}
         value={rangeInputValue}
         min={min} 
         max={max} 
         step={step}/>
       <div style={styles.showValues}>
-        DoubleInputRange.value: [{rangeInputValue[0]}, {rangeInputValue[1]}]
+        MultiInputRange.value: [{rangeInputValue.map((value, idx, arr)=>{
+          const handleComma = idx<arr.length-1 ? ', ':'';
+          return `${value}${handleComma}`;
+        })}]
       </div>
     </>
   );

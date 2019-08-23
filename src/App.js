@@ -70,7 +70,7 @@ function App() {
       <MultiInputRange 
         count={count}
         onChange={onChange}
-        value={rangeInputValue}
+        multiInputRangeValues={rangeInputValue}
         min={min} 
         max={max} 
         step={step}/>
